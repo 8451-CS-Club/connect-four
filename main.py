@@ -7,9 +7,7 @@ def game_loop():
     board = GameBoard()
     winner = False
     while (winner == False):
-        move_status = player1.make_move(board)
-        if move_status == False:
-            break
+        player1.make_move(board)
         board.print_board()
         winner = board.check_for_winner('R')
 
