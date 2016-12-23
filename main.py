@@ -1,5 +1,5 @@
 from gameboard import GameBoard
-from player1 import make_move
+import player1
 
 
 def game_loop():
@@ -7,9 +7,11 @@ def game_loop():
     board = GameBoard()
     winner = False
     while (winner == False):
-        make_move(board)
+        move_status = player1.make_move(board)
+        if move_status == False:
+            break
         board.print_board()
-        print(board.check_for_winner)
+        winner = board.check_for_winner('R')
 
 if __name__ == '__main__':
     game_loop()

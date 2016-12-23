@@ -32,7 +32,7 @@ class GameBoard:
 
         # Be sure there's already a piece below it
         if y < 7:
-            if self.board[y+1][x] == ' ':
+            if self.board[y][x] != ' ':
                 print("That's not a valid spot.")
 
         # Be sure the spot isn't taken and place the piece
@@ -50,6 +50,7 @@ class GameBoard:
                 if self.board[y][x] == color \
                 and self.board[y][x+1] == color \
                 and self.board[y][x+2] == color:
+                    print("you won!")
                     return True
 
         # check vertical
@@ -58,4 +59,5 @@ class GameBoard:
                 if self.board[y][x] == color \
                 and self.board[y+1][x] == color \
                 and self.board[y+2][x] == color:
+                    print("you won!")
                     return True
