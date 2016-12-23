@@ -18,21 +18,22 @@ class GameBoard:
         '''
         method to place a piece into the board.
         '''
-        # input checks
-        if x > 7 or x < 1:
-            print("X must be in between 1 and 7")
-        if y > 6 or y < 1:
-            print("Y must be in between 1 and 6")
-        if color != 'R' and color != 'Y':
-            print("Color must be either R or Y")
 
         # Take one off of each value to account for zero indexes
         x = x - 1
         y = y - 1
 
+        # input checks
+        if x > 6 or x < 0:
+            print("X must be in between 1 and 7")
+        if y > 5 or y < 0:
+            print("Y must be in between 1 and 6")
+        if color != 'R' and color != 'Y':
+            print("Color must be either R or Y")
+
         # Be sure there's already a piece below it
-        if y <= 7:
-            if self.board[y][x] == ' ':
+        if y + 1 < 6:
+            if self.board[y+1][x] == ' ':
                 print("That's not a valid spot.")
 
         # Be sure the spot isn't taken and place the piece
