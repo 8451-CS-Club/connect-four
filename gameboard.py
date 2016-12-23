@@ -31,8 +31,8 @@ class GameBoard:
         y = y - 1
 
         # Be sure there's already a piece below it
-        if y < 7:
-            if self.board[y][x] != ' ':
+        if y <= 7:
+            if self.board[y][x] == ' ':
                 print("That's not a valid spot.")
 
         # Be sure the spot isn't taken and place the piece
