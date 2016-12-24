@@ -51,8 +51,8 @@ class GameBoard:
                 if self.board[y][x] == color \
                 and self.board[y][x+1] == color \
                 and self.board[y][x+2] == color:
-                    print("you won!")
-                    return True
+                    print(color + " wins!")
+                    return color
 
         # check vertical
         for y in range(self.rows - 3):
@@ -60,5 +60,7 @@ class GameBoard:
                 if self.board[y][x] == color \
                 and self.board[y+1][x] == color \
                 and self.board[y+2][x] == color:
-                    print("you won!")
-                    return True
+                    print(color + " wins!")
+                    return color
+
+        return None
