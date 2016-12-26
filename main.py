@@ -1,6 +1,6 @@
 from gameboard import GameBoard
 import player1 as p1
-import player1 as p2
+import player2 as p2
 import time
 
 
@@ -24,10 +24,13 @@ def game_loop():
         else: #if there have been an even number of moves...you get it
             player = p1
             color = 'R'
+        #increment the number of turns
+        n_turns = n_turns + 1
 
         #Loop until valid input
         is_valid = False
         while (not is_valid):
+            print("player " + color)
             x,y = player.make_move(board) #call the player's move function 
             is_valid = board.check_valid(x, y, color)
 
