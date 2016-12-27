@@ -14,35 +14,32 @@ class GameBoard:
             print(*row, sep=' | ')
 
 
-    def check_valid(self, x, y, color):
+    def check_valid(self, col, color):
         '''
         Method to check that a spot is valid
 	Returns True if valid, False if not
         '''
-        # Take one off of each value to account for zero indexes
-        x = x - 1
-        y = y - 1
+        # Take one off of the input value to account for zero indexes
+        col = col - 1
 
         # Check that it's on the board
-        if x >= self.columns  or x < 0:
-            print("X must be in between 1 and 6")
+        if col >= self.columns  or col < 0:
+            print("Column number must be in between 1 and 6")
             return False
-        if y >= self.rows or y < 0:
-            print("Y must be in between 1 and 7")
-            return False
+        #Check if the color is valid
         if color != 'R' and color != 'Y':
             print("Color must be either R or Y")
             return False
-
-        # Be sure there's already a piece below it
-        if y + 1 < 6:
-            if self.board[y+1][x] == ' ':
-                print("That's not a valid spot.")
-                return False
-
-        # Be sure the spot isn't taken and place the piece
-        if self.board[y][x] != ' ':
-            print("That spot is already taken!")
+        
+        # Find the first open spot in that column
+        col_is_full = True
+        for y in reversed(range(self.rows)):
+            if self.board[y][col] == ' ': #If that spot is empty
+                col_is_full = False #Note that there is space for the piece
+                break #stop looping
+        
+        if col_is_full == True:
+            print("That column is full")
             return False
 
         #If you pass all these tests, return true
@@ -50,16 +47,19 @@ class GameBoard:
         
 
 
-    def place_piece(self, x, y, color):
+    def place_piece(self, col, color):
         '''
         method to place a piece into the board.
         '''
 
-        # Take one off of each value to account for zero indexes
-        x = x - 1
-        y = y - 1
-
-        self.board[y][x] = color
+        # Take one off of the input value to account for zero indexes
+        col = col  - 1
+        
+        # Find the first open spot in that column
+        for y in reversed(range(self.rows)):
+            if self.board[y][col] == ' ': #If that spot is empty
+                self.board[y][col] = color #Place the piece
+                break #stop looping
 
 
     def check_for_winner(self, color):

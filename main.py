@@ -31,11 +31,11 @@ def game_loop():
         is_valid = False
         while (not is_valid):
             print("player " + color)
-            x,y = player.make_move(board) #call the player's move function 
-            is_valid = board.check_valid(x, y, color)
+            col = player.make_move(board) #call the player's move function 
+            is_valid = board.check_valid(col, color)
 
 	#Place the piece and check for a winner
-        board.place_piece(x, y, color)
+        board.place_piece(col, color)
         winner = board.check_for_winner(color)
 
 #Driver
