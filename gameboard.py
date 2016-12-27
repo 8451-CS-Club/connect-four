@@ -10,8 +10,18 @@ class GameBoard:
         '''
         used to display the current state of the board
         '''
+        #print column headers
+        print("     ", end = "") #spacer
+        print(*[x + 1 for x in range(self.columns)], sep = '   ')
+        print("-----", end = "")
+        print("-" * self.columns * 4)
+
+        rownum = 0 #initialize row number
         for row in self.board:
-            print(*row, sep=' | ')
+            rownum = rownum + 1
+            print(str(rownum) + "  | ", end = "") #print the row number
+            print(*row, sep=' | ', end = "") #print the row
+            print(" |\n", end = "")
 
 
     def check_valid(self, col, color):
