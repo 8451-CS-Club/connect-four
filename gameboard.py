@@ -75,20 +75,24 @@ class GameBoard:
     def check_for_winner(self, color):
 
         # check horizontal
-        for x in range(self.columns - 3):
-            for y in range(self.rows - 3):
+        for x in range(self.columns - 2):
+            for y in range(self.rows):
                 if self.board[y][x] == color \
                 and self.board[y][x+1] == color \
-                and self.board[y][x+2] == color:
+                and self.board[y][x+2] == color \
+                and self.board[y][x+3] == color:
+                    self.print_board()
                     print(color + " wins!")
                     return color
 
         # check vertical
         for y in range(self.rows - 3):
-            for x in range(self.columns - 3):
+            for x in range(self.columns):
                 if self.board[y][x] == color \
                 and self.board[y+1][x] == color \
-                and self.board[y+2][x] == color:
+                and self.board[y+2][x] == color \
+		and self.board[y+3][x] == color:
+                    self.print_board()
                     print(color + " wins!")
                     return color
 
