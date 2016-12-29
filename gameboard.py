@@ -40,21 +40,21 @@ class GameBoard:
         if color != 'R' and color != 'Y':
             print("Color must be either R or Y")
             return False
-        
+
         # Find the first open spot in that column
         col_is_full = True
         for y in reversed(range(self.rows)):
             if self.board[y][col] == ' ': #If that spot is empty
                 col_is_full = False #Note that there is space for the piece
                 break #stop looping
-        
+
         if col_is_full == True:
             print("That column is full")
             return False
 
         #If you pass all these tests, return true
         return True
-        
+
 
 
     def place_piece(self, col, color):
@@ -64,7 +64,7 @@ class GameBoard:
 
         # Take one off of the input value to account for zero indexes
         col = col  - 1
-        
+
         # Find the first open spot in that column
         for y in reversed(range(self.rows)):
             if self.board[y][col] == ' ': #If that spot is empty
@@ -91,9 +91,54 @@ class GameBoard:
                 if self.board[y][x] == color \
                 and self.board[y+1][x] == color \
                 and self.board[y+2][x] == color \
-		and self.board[y+3][x] == color:
+		        and self.board[y+3][x] == color:
                     self.print_board()
                     print(color + " wins!")
                     return color
+
+        # check diagonal (top right to bottom left)
+        for y in range(self.rows - 3):
+            for x in range(self.columns):
+                if self.board[y][x] == color \
+                and self.board[y+1][x-1] == color \
+                and self.board[y+2][x-2] == color \
+                and self.board[y+3][x-3] == color:
+                    self.print_board()
+                    print(color + " wins!")
+                    return color
+
+        # check diagonal (bottom left to top right)
+        for y in range(self.rows - 3):
+            for x in range(self.columns):
+                if self.board[y][x] == color \
+                and self.board[y-1][x+1] == color \
+                and self.board[y-2][x+2] == color \
+                and self.board[y-3][x+3] == color:
+                    self.print_board()
+                    print(color + " wins!")
+                    return color
+
+        # check diagonal (bottom right to top left)
+        for y in range(self.rows -3):
+            for x in range(self.columns):
+                if self.board[y][x] == color \
+                and self.board[y-1][x-1] == color \
+                and self.board[y-2][x-2] == color \
+                and self.board[y-3][x-3] == color:
+                    self.print_board()
+                    print(color + " wins!")
+                    return color
+
+        # check diagonal (top left to bottom right)
+        for y in range(self.rows -3):
+            for x in range(self.columns):
+                if self.board[y][x] == color \
+                and self.board[y+1][x+1] == color \
+                and self.board[y+2][x+2] == color \
+                and self.board[y+3][x+3] == color:
+                    self.print_board()
+                    print(color + " wins!")
+                    return color
+
 
         return None
