@@ -75,7 +75,7 @@ class GameBoard:
     def check_for_winner(self, color):
 
         # check horizontal
-        for x in range(self.columns - 2):
+        for x in range(self.columns - 3):
             for y in range(self.rows):
                 if self.board[y][x] == color \
                 and self.board[y][x+1] == color \
@@ -91,47 +91,26 @@ class GameBoard:
                 if self.board[y][x] == color \
                 and self.board[y+1][x] == color \
                 and self.board[y+2][x] == color \
-		        and self.board[y+3][x] == color:
+		and self.board[y+3][x] == color:
                     self.print_board()
                     print(color + " wins!")
                     return color
 
         # check diagonal (top right to bottom left)
         for y in range(self.rows - 3):
-            for x in range(self.columns):
-                if self.board[y][x] == color \
-                and self.board[y+1][x-1] == color \
-                and self.board[y+2][x-2] == color \
-                and self.board[y+3][x-3] == color:
-                    self.print_board()
-                    print(color + " wins!")
-                    return color
-
-        # check diagonal (bottom left to top right)
-        for y in range(self.rows - 3):
-            for x in range(self.columns):
-                if self.board[y][x] == color \
-                and self.board[y-1][x+1] == color \
-                and self.board[y-2][x+2] == color \
-                and self.board[y-3][x+3] == color:
-                    self.print_board()
-                    print(color + " wins!")
-                    return color
-
-        # check diagonal (bottom right to top left)
-        for y in range(self.rows -3):
-            for x in range(self.columns):
-                if self.board[y][x] == color \
-                and self.board[y-1][x-1] == color \
-                and self.board[y-2][x-2] == color \
-                and self.board[y-3][x-3] == color:
+            for x in range(self.columns - 3):
+                print(x, " ", y)
+                if self.board[y][x+3] == color \
+                and self.board[y+1][x+2] == color \
+                and self.board[y+2][x+1] == color \
+                and self.board[y+3][x] == color:
                     self.print_board()
                     print(color + " wins!")
                     return color
 
         # check diagonal (top left to bottom right)
-        for y in range(self.rows -3):
-            for x in range(self.columns):
+        for y in range(self.rows - 3):
+            for x in range(self.columns - 3):
                 if self.board[y][x] == color \
                 and self.board[y+1][x+1] == color \
                 and self.board[y+2][x+2] == color \
@@ -139,6 +118,5 @@ class GameBoard:
                     self.print_board()
                     print(color + " wins!")
                     return color
-
 
         return None
