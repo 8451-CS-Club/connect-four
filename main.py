@@ -37,6 +37,9 @@ def game_loop():
 	#Place the piece and check for a winner
         board.place_piece(col, color)
         winner = board.check_for_winner(color)
+        if winner:
+            board.print_board()
+            print(color, " wins!")
 
 #Driver
 if __name__ == '__main__':
