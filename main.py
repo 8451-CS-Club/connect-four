@@ -31,7 +31,7 @@ def game_loop():
         is_valid = False
         while (not is_valid):
             print("player " + color)
-            col = player.make_move(board) #call the player's move function 
+            col = player.make_move(board, color) #call the player's move function 
             is_valid = board.check_valid(col, color)
 
 	#Place the piece and check for a winner
