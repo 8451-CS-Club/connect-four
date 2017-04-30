@@ -9,7 +9,7 @@ import time
 
 def game_loop():
 
-    board = GameBoard(4,4) #initialize a board
+    board = GameBoard() #initialize a board
     winner = None #initialize the winner variable
     n_turns = 0 #initialize the turn count
 
@@ -39,7 +39,7 @@ def game_loop():
 
 	#Place the piece and check for a winner
         board.place_piece(col, color)
-        winner = board.check_for_winner(color)
+        winner = board.check_for_winner()
         if (winner is not None):
             print(color + " wins!")
             print("Here is the final board:")
