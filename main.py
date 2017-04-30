@@ -1,6 +1,6 @@
 from gameboard import GameBoard
 import player1 as p1
-import player2 as p2
+import ethan as p2
 import time
 
 
@@ -9,7 +9,7 @@ import time
 
 def game_loop():
 
-    board = GameBoard() #initialize a board
+    board = GameBoard(4,4) #initialize a board
     winner = None #initialize the winner variable
     n_turns = 0 #initialize the turn count
 
@@ -34,8 +34,7 @@ def game_loop():
             if player == p1:
                 col = int(input("column: "))
             else:
-                col = int(input("column: "))
-                #col = player.make_move(board, color) #call the player's move function 
+                col = player.make_move(board, color) #call the player's move function 
             is_valid = board.check_valid(col, color)
 
 	#Place the piece and check for a winner
