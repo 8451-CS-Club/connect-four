@@ -12,7 +12,7 @@ def make_move(board, color):
 
     highest_score = max(score_dict.items(), key=operator.itemgetter(1))[0]
     print(score_dict)
-    return highest_score + 1
+    return highest_score
 
 
 def get_proximity_score(board_copy, col, color):
