@@ -31,15 +31,20 @@ def game_loop():
         is_valid = False
         while (not is_valid):
             print("player " + color)
-            col = player.make_move(board, color) #call the player's move function 
+            if player == p1:
+                col = int(input("column: "))
+            else:
+                col = int(input("column: "))
+                #col = player.make_move(board, color) #call the player's move function 
             is_valid = board.check_valid(col, color)
 
 	#Place the piece and check for a winner
         board.place_piece(col, color)
         winner = board.check_for_winner(color)
-        if winner:
+        if (winner is not None):
+            print(color + " wins!")
+            print("Here is the final board:")
             board.print_board()
-            print(color, " wins!")
 
 #Driver
 if __name__ == '__main__':

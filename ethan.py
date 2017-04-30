@@ -6,6 +6,8 @@ import copy
 def make_move(board, color):
     best_move_x = 0
     best_val = -2 #This value being lower than -1 means the player will prefer an empty space over nothing, even if it means losing
+    return(find_best_move(board, color))
+
     for x in range(board.columns):
         print("looping on x: ",x)
         open_y = open_row(board, x)
@@ -24,20 +26,25 @@ def make_move(board, color):
             best_val = current_val
             best_move_x = x
         print("finished looping on x: ", x)
-    return(best_move_x + 1) #account for the "human" indexing of the board
+    return(best_move_x)
 
 # Recursive function to figure out who will win in
 # this situation given optimal play
 def board_val(board, color):
     board_val.counter += 1
-    if (not (board_val.counter % 1000)):
+    if (not (board_val.counter % 10000)):
         print(board_val.counter)
     # Exit conditions first
     winner = board.check_for_winner(color)
+    print(winner)
     if (winner == color):
+        print(color + "got to a win")
         return 1
-    elif (winner is not None):
-        return -1
+    # I don't think there's any way to have lost when this is called, beacuse you'd
+    # the player who calls this has just made her move
+    #elif (winner is not None):
+    #    print(color + "got to a loss")
+    #    return -1
     else:
         max_opp_board_val = -1
         opp_move_x = -1
@@ -48,7 +55,7 @@ def board_val(board, color):
             if (open_y == -1):
                 continue #skip to the next column
             opp_color = 'R' if (color == 'Y') else 'Y' #concisely get opponent's color
-            #create a new board with an opponent's piece there
+            # Create a new board with an opponent's piece in the selected spot
             new_board = copy.deepcopy(board)
             new_board.board[open_y][x] = opp_color
             #Calculate this board's value to your opponent
@@ -66,6 +73,10 @@ def board_val(board, color):
         return(-1 * max_opp_board_val)
 
 board_val.counter = 0
+
+
+find_best_move
+
 
 # Get the first open row in a column
 # Return -1 if no opening

@@ -11,17 +11,18 @@ class GameBoard:
         used to display the current state of the board
         '''
         #print column headers
-        print("     ", end = "") #spacer
-        print(*[x + 1 for x in range(self.columns)], sep = '   ')
+        print("     ", end="") #spacer
+        print(*[x for x in range(self.columns)], sep = '   ')
         print("-----", end = "")
         print("-" * self.columns * 4)
 
         rownum = 0 #initialize row number
         for row in self.board:
-            rownum = rownum + 1
+            rownum = rownum
             print(str(rownum) + "  | ", end = "") #print the row number
             print(*row, sep=' | ', end = "") #print the row
             print(" |\n", end = "")
+        print("\n\n")
 
 
     def check_valid(self, col, color):
@@ -30,14 +31,14 @@ class GameBoard:
 	Returns True if valid, False if not
         '''
         # Take one off of the input value to account for zero indexes
-        col = col - 1
+        col = col
 
         # Check that it's on the board
         if col >= self.columns  or col < 0:
-            print("Column number must be in between 1 and 6")
+            print("Column number must be in between 0 and " + str(self.columns))
             return False
         #Check if the color is valid
-        if color != 'R' and color != 'Y':
+        if color not in ('R','Y'):
             print("Color must be either R or Y")
             return False
 
@@ -62,9 +63,6 @@ class GameBoard:
         method to place a piece into the board.
         '''
 
-        # Take one off of the input value to account for zero indexes
-        col = col  - 1
-
         # Find the first open spot in that column
         for y in reversed(range(self.rows)):
             if self.board[y][col] == ' ': #If that spot is empty
@@ -81,8 +79,6 @@ class GameBoard:
                 and self.board[y][x+1] == color \
                 and self.board[y][x+2] == color \
                 and self.board[y][x+3] == color:
-                    #self.print_board()
-                    #print(color + " wins!")
                     return color
 
         # check vertical
@@ -92,8 +88,6 @@ class GameBoard:
                 and self.board[y+1][x] == color \
                 and self.board[y+2][x] == color \
 		and self.board[y+3][x] == color:
-                    #self.print_board()
-                    #print(color + " wins!")
                     return color
 
         # check diagonal (top right to bottom left)
@@ -103,8 +97,6 @@ class GameBoard:
                 and self.board[y+1][x+2] == color \
                 and self.board[y+2][x+1] == color \
                 and self.board[y+3][x] == color:
-                    #self.print_board()
-                    #print(color + " wins!")
                     return color
 
         # check diagonal (top left to bottom right)
@@ -114,8 +106,16 @@ class GameBoard:
                 and self.board[y+1][x+1] == color \
                 and self.board[y+2][x+2] == color \
                 and self.board[y+3][x+3] == color:
-                    #self.print_board()
-                    #print(color + " wins!")
                     return color
 
+        # Last, check to see if the board is full even though
+        # there was no winner (a stalemate)
+        cells = [self.board[y][x] for x in range(self.columns)
+                                  for y in range(self.rows)]
+        # If there are no blank spaces left...
+        if ' ' not in cells:
+            return(' ')
+
+        # If none of the above conditions are met, nothing
+        # interesting has happened
         return None
