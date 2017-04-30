@@ -10,18 +10,21 @@ class GameBoard:
         '''
         used to display the current state of the board
         '''
-        #print column headers
-        print("     ", end="") #spacer
-        print(*[x for x in range(self.columns)], sep = '   ')
-        print("-----", end = "")
-        print("-" * self.columns * 4)
+        print("   -", end="") #spacer
+        print("-" * 4 * self.columns)
 
-        rownum = 0 #initialize row number
-        for row in self.board:
-            rownum = rownum
+        # Print row numbers and the board itself
+        for rownum, row in reversed(list(enumerate(self.board))):
             print(str(rownum) + "  | ", end = "") #print the row number
             print(*row, sep=' | ', end = "") #print the row
             print(" |\n", end = "")
+
+        # Print column numbers
+        print("   -", end="") #spacer
+        print("-" * 4 * self.columns)
+        print("     ", end="")
+        print(*[x for x in range(self.columns)], sep = '   ')
+
         print("\n\n")
 
 
@@ -64,7 +67,7 @@ class GameBoard:
         '''
 
         # Find the first open spot in that column
-        for y in reversed(range(self.rows)):
+        for y in range(self.rows):
             if self.board[y][col] == ' ': #If that spot is empty
                 self.board[y][col] = color #Place the piece
                 break #stop looping
@@ -119,3 +122,12 @@ class GameBoard:
         # If none of the above conditions are met, nothing
         # interesting has happened
         return None
+
+
+    # Create a copy of the current board and return it
+    def copy(self):
+        new_board = GameBoard(self.columns, self.rows)
+        for x in range(self.columns):
+            for y in range(self.rows):
+                new_board.board[y][x] = self.board[y][x]
+        return(new_board) 
